@@ -24,15 +24,34 @@ import {
 } from '../constants/productConstants'
 import { logout } from './userActions'
 
-export const listProducts = (keyword = '', pageNumber = '') => async (
-  dispatch
-) => {
+export const listProducts = (
+  keyword = '',
+  pageNumber = '',
+  filters = {}
+) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST })
 
-    const { data } = await axios.get(
-      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
-    )
+    // Build query string
+    let queryString = `keyword=${keyword}&pageNumber=${pageNumber}`
+    
+    // Add organic filters
+    if (filters.isOrganic) queryString += '&isOrganic=true'
+    if (filters.isVegan) queryString += '&isVegan=true'
+    if (filters.isGlutenFree) queryString += '&isGlutenFree=true'
+    if (filters.isFairTrade) queryString += '&isFairTrade=true'
+    if (filters.productType) queryString += `&productType=${filters.productType}`
+    if (filters.category) queryString += `&category=${filters.category}`
+    if (filters.brand) queryString += `&brand=${filters.brand}`
+    if (filters.certification) queryString += `&certification=${filters.certification}`
+    if (filters.origin) queryString += `&origin=${filters.origin}`
+    if (filters.minPrice) queryString += `&minPrice=${filters.minPrice}`
+    if (filters.maxPrice) queryString += `&maxPrice=${filters.maxPrice}`
+    if (filters.featured) queryString += '&featured=true'
+    if (filters.newArrival) queryString += '&newArrival=true'
+    if (filters.sortBy) queryString += `&sortBy=${filters.sortBy}`
+
+    const { data } = await axios.get(`/api/products?${queryString}`)
 
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
@@ -226,11 +245,11 @@ export const createProductReview = (productId, review) => async (
   }
 }
 
-export const listTopProducts = () => async (dispatch) => {
+export const listTopProducts = (limit = 3) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_TOP_REQUEST })
 
-    const { data } = await axios.get(`/api/products/top`)
+    const { data } = await axios.get(`/api/products/top?limit=${limit}`)
 
     dispatch({
       type: PRODUCT_TOP_SUCCESS,
@@ -239,6 +258,79 @@ export const listTopProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_TOP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const listOrganicProducts = (pageNumber = '') => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_LIST_REQUEST })
+
+    const { data } = await axios.get(
+      `/api/products/organic?pageNumber=${pageNumber}`
+    )
+
+    dispatch({
+      type: PRODUCT_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const listProductsByType = (type, pageNumber = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: PRODUCT_LIST_REQUEST })
+
+    const { data } = await axios.get(
+      `/api/products/type/${type}?pageNumber=${pageNumber}`
+    )
+
+    dispatch({
+      type: PRODUCT_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const listProductsByCertification = (certId, pageNumber = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: PRODUCT_LIST_REQUEST })
+
+    const { data } = await axios.get(
+      `/api/products/certification/${certId}?pageNumber=${pageNumber}`
+    )
+
+    dispatch({
+      type: PRODUCT_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

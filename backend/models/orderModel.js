@@ -1,11 +1,11 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const orderSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User',
+      ref: "User",
     },
     orderItems: [
       {
@@ -16,8 +16,16 @@ const orderSchema = mongoose.Schema(
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
-          ref: 'Product',
+          ref: "Product",
         },
+        // Additional fields for organic products
+        isOrganic: { type: Boolean, default: false },
+        certifications: [
+          {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Certification",
+          },
+        ],
       },
     ],
     shippingAddress: {
@@ -51,6 +59,32 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: 0.0,
     },
+    // Organic store specific fields
+    orderType: {
+      type: String,
+      enum: ["one-time", "subscription"],
+      default: "one-time",
+    },
+    subscriptionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Subscription",
+    },
+    giftMessage: {
+      type: String,
+      default: "",
+    },
+    giftWrap: {
+      type: Boolean,
+      default: false,
+    },
+    organicCertification: {
+      type: Boolean,
+      default: false, // True if order contains certified organic items
+    },
+    estimatedDeliveryDate: {
+      type: Date,
+    },
+    // Existing fields
     isPaid: {
       type: Boolean,
       required: true,
@@ -71,8 +105,8 @@ const orderSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
 
-const Order = mongoose.model('Order', orderSchema)
+const Order = mongoose.model("Order", orderSchema);
 
-export default Order
+export default Order;

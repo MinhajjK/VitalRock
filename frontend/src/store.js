@@ -10,6 +10,21 @@ import {
   productReviewCreateReducer,
   productTopRatedReducer,
 } from './reducers/productReducers'
+import {
+  categoryListReducer,
+  categoryDetailsReducer,
+  categoryTreeReducer,
+} from './reducers/categoryReducers'
+import {
+  brandListReducer,
+  brandDetailsReducer,
+  brandVerifiedReducer,
+} from './reducers/brandReducers'
+import {
+  certificationListReducer,
+  certificationDetailsReducer,
+  certificationByTypeReducer,
+} from './reducers/certificationReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
   userLoginReducer,
@@ -37,6 +52,15 @@ const reducer = combineReducers({
   productUpdate: productUpdateReducer,
   productReviewCreate: productReviewCreateReducer,
   productTopRated: productTopRatedReducer,
+  categoryList: categoryListReducer,
+  categoryDetails: categoryDetailsReducer,
+  categoryTree: categoryTreeReducer,
+  brandList: brandListReducer,
+  brandDetails: brandDetailsReducer,
+  brandVerified: brandVerifiedReducer,
+  certificationList: certificationListReducer,
+  certificationDetails: certificationDetailsReducer,
+  certificationByType: certificationByTypeReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
