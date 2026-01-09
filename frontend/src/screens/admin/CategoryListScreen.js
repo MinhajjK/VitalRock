@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { listCategories } from "../../actions/categoryActions";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 
-const CategoryListScreen = ({ history, match }) => {
+const CategoryListScreen = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const categoryList = useSelector((state) => state.categoryList);
@@ -19,9 +21,9 @@ const CategoryListScreen = ({ history, match }) => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listCategories());
     } else {
-      history.push("/login");
+      navigate("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, navigate, userInfo]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this category?")) {

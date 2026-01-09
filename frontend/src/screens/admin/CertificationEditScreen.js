@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import { listCertificationDetails } from "../../actions/certificationActions";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 
-const CertificationEditScreen = ({ match, history }) => {
-  const certId = match.params.id;
+const CertificationEditScreen = () => {
+  const { id: certId } = useParams();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [type, setType] = useState("Organic");
@@ -27,7 +29,7 @@ const CertificationEditScreen = ({ match, history }) => {
 
   useEffect(() => {
     if (!userInfo || !userInfo.isAdmin) {
-      history.push("/login");
+      navigate("/login");
     }
 
     if (certId) {
@@ -41,7 +43,7 @@ const CertificationEditScreen = ({ match, history }) => {
         setIsActive(certification.isActive);
       }
     }
-  }, [dispatch, history, certId, certification, userInfo]);
+  }, [dispatch, navigate, certId, certification, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();

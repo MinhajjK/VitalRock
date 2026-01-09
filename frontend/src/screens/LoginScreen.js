@@ -1,75 +1,172 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import FormContainer from '../components/FormContainer'
-import { login } from '../actions/userActions'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { login } from "../actions/userActions";
+import "../styles/authScreens.css";
+import "../styles/organicTheme.css";
 
-const LoginScreen = ({ location, history }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+const LoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect)
+      navigate(redirect);
     }
-  }, [history, userInfo, redirect])
+  }, [navigate, userInfo, redirect]);
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    dispatch(login(email, password))
-  }
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
 
   return (
-    <FormContainer>
-      <h1>Sign In</h1>
-      {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />}
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Enter email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+    <div className="auth-screen-wrapper">
+      <div className="auth-container">
+        <div className="auth-card">
+          {/* Brand Section */}
+          <div className="auth-brand">
+            <div className="auth-brand-icon">
+              <i className="fas fa-leaf"></i>
+            </div>
+            <h2 className="auth-brand-title">VitalRock</h2>
+            <p className="auth-brand-subtitle">Organic Store</p>
+          </div>
 
-        <Form.Group controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Enter password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          {/* Heading */}
+          <div className="auth-heading">
+            <h1>Welcome Back</h1>
+            <p>Sign in to access your organic wellness journey</p>
+          </div>
 
-        <Button type='submit' variant='primary'>
-          Sign In
-        </Button>
-      </Form>
+          {/* Error Message */}
+          {error && (
+            <div className="auth-message auth-message-error">
+              <i className="fas fa-exclamation-circle"></i>
+              <span>{error}</span>
+            </div>
+          )}
 
-      <Row className='py-3'>
-        <Col>
-          New Customer?{' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-            Register
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
-  )
-}
+          {/* Login Form */}
+          <form onSubmit={submitHandler}>
+            {/* Email Field */}
+            <div className="auth-form-group">
+              <label className="auth-form-label" htmlFor="email">
+                Email Address
+              </label>
+              <div className="auth-form-input-wrapper">
+                <i className="fas fa-envelope auth-form-input-icon"></i>
+                <input
+                  type="email"
+                  id="email"
+                  className="auth-form-input"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                />
+              </div>
+            </div>
 
-export default LoginScreen
+            {/* Password Field */}
+            <div className="auth-form-group">
+              <label className="auth-form-label" htmlFor="password">
+                Password
+              </label>
+              <div className="auth-form-input-wrapper">
+                <i className="fas fa-lock auth-form-input-icon"></i>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  className="auth-form-input"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  className="auth-password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  <i
+                    className={`fas ${
+                      showPassword ? "fa-eye-slash" : "fa-eye"
+                    }`}
+                  ></i>
+                </button>
+              </div>
+            </div>
+
+            {/* Forgot Password */}
+            <div className="auth-forgot-password">
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="auth-submit-btn"
+              disabled={loading}
+            >
+              {loading ? (
+                <div className="auth-loader-container">
+                  <div className="auth-loader"></div>
+                </div>
+              ) : (
+                "Sign In"
+              )}
+            </button>
+          </form>
+
+          {/* Footer */}
+          <div className="auth-footer">
+            <p className="auth-footer-text">
+              New to VitalRock?{" "}
+              <Link
+                to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                className="auth-link"
+              >
+                Create an Account
+              </Link>
+            </p>
+          </div>
+
+          {/* Features Section */}
+          <div className="auth-features">
+            <h3 className="auth-features-title">Why Shop With Us?</h3>
+            <ul className="auth-features-list">
+              <li className="auth-features-item">
+                <i className="fas fa-check-circle"></i>
+                <span>100% Certified Organic Products</span>
+              </li>
+              <li className="auth-features-item">
+                <i className="fas fa-check-circle"></i>
+                <span>Free Shipping on Orders Over $50</span>
+              </li>
+              <li className="auth-features-item">
+                <i className="fas fa-check-circle"></i>
+                <span>Eco-Friendly Packaging</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LoginScreen;

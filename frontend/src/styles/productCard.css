@@ -1,0 +1,417 @@
+/* Product Card Styles for VitalRock Organic Store */
+
+.organic-product-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid transparent;
+  margin-bottom: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.organic-product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(107, 142, 35, 0.2);
+  border-color: var(--organic-green-light);
+}
+
+/* Product Image Container */
+.organic-product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 1.5rem;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.organic-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.organic-product-card:hover .organic-product-image {
+  transform: scale(1.1) rotate(2deg);
+}
+
+/* Overlay on Hover */
+.organic-product-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(107, 142, 35, 0.9),
+    rgba(143, 188, 75, 0.9)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.organic-product-card:hover .organic-product-overlay {
+  opacity: 1;
+}
+
+.organic-product-quick-view {
+  background: white;
+  color: var(--organic-green-dark);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.organic-product-card:hover .organic-product-quick-view {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+.organic-product-quick-view:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Product Badges */
+.organic-product-badges {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+.organic-product-badges-left,
+.organic-product-badges-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.organic-badge-featured {
+  background: linear-gradient(135deg, #ffd700, #ffa500);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 10px rgba(255, 165, 0, 0.4);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    box-shadow: 0 3px 10px rgba(255, 165, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 3px 15px rgba(255, 165, 0, 0.6);
+  }
+}
+
+.organic-badge-new {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.4);
+}
+
+.organic-badge-discount {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 10px rgba(238, 90, 82, 0.4);
+}
+
+/* Product Body */
+.organic-product-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
+}
+
+.organic-product-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  min-height: 2.8em;
+  transition: color 0.3s ease;
+}
+
+.organic-product-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.organic-product-title-link:hover .organic-product-title {
+  color: var(--organic-green);
+}
+
+/* Product Attributes */
+.organic-product-attributes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-height: 30px;
+}
+
+.organic-attribute-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.organic-attribute-organic {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #2e7d32;
+  border: 1px solid #4caf50;
+}
+
+.organic-attribute-vegan {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  color: #ef6c00;
+  border: 1px solid #ff9800;
+}
+
+.organic-attribute-gluten-free {
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  color: #c2185b;
+  border: 1px solid #e91e63;
+}
+
+.organic-attribute-icon {
+  font-size: 0.8rem;
+}
+
+/* Origin */
+.organic-product-origin {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--charcoal);
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.organic-product-origin i {
+  color: var(--organic-green);
+}
+
+/* Rating */
+.organic-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+/* Price */
+.organic-product-price-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.organic-product-price {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--organic-green-dark);
+  line-height: 1;
+}
+
+.organic-product-price-unit {
+  font-size: 0.75rem;
+  color: var(--charcoal);
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.organic-product-original-price {
+  font-size: 1rem;
+  color: #999;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+/* Stock Status */
+.organic-product-stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.organic-product-stock-in {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #2e7d32;
+}
+
+.organic-product-stock-low {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  color: #ef6c00;
+}
+
+.organic-product-stock-out {
+  background: linear-gradient(135deg, #ffebee, #ffcdd2);
+  color: #c62828;
+}
+
+/* Certifications */
+.organic-product-certifications {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+/* Add to Cart Button (if needed in card) */
+.organic-add-to-cart-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(
+    135deg,
+    var(--organic-green-light),
+    var(--organic-green)
+  );
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.organic-add-to-cart-btn:hover {
+  background: linear-gradient(
+    135deg,
+    var(--organic-green),
+    var(--organic-green-dark)
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(107, 142, 35, 0.3);
+}
+
+.organic-add-to-cart-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Wishlist Icon */
+.organic-wishlist-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.organic-wishlist-btn:hover {
+  background: var(--organic-green);
+  color: white;
+  transform: scale(1.1);
+}
+
+.organic-wishlist-btn.active {
+  background: #ff6b6b;
+  color: white;
+}
+
+.organic-wishlist-btn i {
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .organic-product-card {
+    border-radius: 15px;
+  }
+
+  .organic-product-image-wrapper {
+    padding: 1rem;
+  }
+
+  .organic-product-body {
+    padding: 1.25rem;
+  }
+
+  .organic-product-title {
+    font-size: 1rem;
+  }
+
+  .organic-product-price {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,391 @@
+/* VitalRock Organic Store - Theme Variables and Global Styles */
+
+:root {
+  /* Primary Organic Color Palette */
+  --organic-green: #6b8e23;
+  --organic-green-light: #8fbc4b;
+  --organic-green-dark: #556b2f;
+  --organic-green-darker: #3d5016;
+
+  /* Earth Tones */
+  --earth-brown: #8b7355;
+  --earth-beige: #f5f5dc;
+  --earth-tan: #d2b48c;
+  --earth-cream: #fffdd0;
+
+  /* Natural Accents */
+  --leaf-green: #90ee90;
+  --forest-green: #228b22;
+  --sage-green: #9dc183;
+  --mint-green: #98ff98;
+
+  /* Neutral Palette */
+  --warm-white: #faf9f6;
+  --soft-gray: #e8e8e8;
+  --charcoal: #36454f;
+  --text-dark: #2c3e2e;
+
+  /* Accent Colors */
+  --organic-orange: #ff8c42;
+  --organic-yellow: #ffd93d;
+  --organic-red: #c85c5c;
+
+  /* Shadows and Effects */
+  --shadow-sm: 0 2px 8px rgba(107, 142, 35, 0.1);
+  --shadow-md: 0 4px 16px rgba(107, 142, 35, 0.15);
+  --shadow-lg: 0 8px 32px rgba(107, 142, 35, 0.2);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 30px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* Organic Gradient Backgrounds */
+.organic-gradient-primary {
+  background: linear-gradient(
+    135deg,
+    var(--organic-green-light) 0%,
+    var(--organic-green) 100%
+  );
+}
+
+.organic-gradient-soft {
+  background: linear-gradient(
+    135deg,
+    var(--earth-cream) 0%,
+    var(--earth-beige) 100%
+  );
+}
+
+.organic-gradient-fresh {
+  background: linear-gradient(
+    135deg,
+    var(--leaf-green) 0%,
+    var(--sage-green) 100%
+  );
+}
+
+.organic-gradient-earth {
+  background: linear-gradient(
+    135deg,
+    var(--earth-tan) 0%,
+    var(--earth-brown) 100%
+  );
+}
+
+/* Organic Textures and Patterns */
+.organic-texture {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(107, 142, 35, 0.02) 10px,
+    rgba(107, 142, 35, 0.02) 20px
+  );
+}
+
+.leaf-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zm0 17c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7z' fill='%236B8E23' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Typography Enhancements */
+.organic-heading {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: var(--text-dark);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.organic-text {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--charcoal);
+  line-height: 1.6;
+}
+
+.organic-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--organic-green-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Button Styles */
+.btn-organic-primary {
+  background: linear-gradient(
+    135deg,
+    var(--organic-green-light) 0%,
+    var(--organic-green) 100%
+  );
+  border: none;
+  color: white;
+  padding: 12px 32px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-organic-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(
+    135deg,
+    var(--organic-green) 0%,
+    var(--organic-green-dark) 100%
+  );
+  color: white;
+}
+
+.btn-organic-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-organic-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn-organic-primary:hover::before {
+  left: 100%;
+}
+
+.btn-organic-outline {
+  background: transparent;
+  border: 2px solid var(--organic-green);
+  color: var(--organic-green);
+  padding: 10px 30px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all var(--transition-normal);
+}
+
+.btn-organic-outline:hover {
+  background: var(--organic-green);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Input Fields */
+.organic-input {
+  border: 2px solid var(--soft-gray);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-size: 1rem;
+  transition: all var(--transition-normal);
+  background: var(--warm-white);
+  color: var(--text-dark);
+}
+
+.organic-input:focus {
+  border-color: var(--organic-green);
+  box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.1);
+  outline: none;
+  background: white;
+}
+
+.organic-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* Cards and Containers */
+.organic-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--soft-gray);
+  transition: all var(--transition-normal);
+}
+
+.organic-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.organic-card-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Badges and Tags */
+.organic-badge {
+  background: var(--organic-green);
+  color: white;
+  padding: 6px 14px;
+  border-radius: var(--radius-xl);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.organic-badge-certified {
+  background: linear-gradient(
+    135deg,
+    var(--organic-green-light),
+    var(--forest-green)
+  );
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(107, 142, 35, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(107, 142, 35, 0);
+  }
+}
+
+/* Links */
+.organic-link {
+  color: var(--organic-green);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.organic-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: var(--organic-green);
+  transition: width var(--transition-normal);
+}
+
+.organic-link:hover {
+  color: var(--organic-green-dark);
+  text-decoration: none;
+}
+
+.organic-link:hover::after {
+  width: 100%;
+}
+
+/* Dividers */
+.organic-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--organic-green),
+    transparent
+  );
+  border: none;
+  margin: 2rem 0;
+}
+
+.organic-divider-vertical {
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--organic-green),
+    transparent
+  );
+  border: none;
+  margin: 0 2rem;
+}
+
+/* Loading Animations */
+.organic-loader {
+  border: 4px solid var(--soft-gray);
+  border-top: 4px solid var(--organic-green);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.organic-pulse {
+  animation: organicPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes organicPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+/* Utility Classes */
+.text-organic {
+  color: var(--organic-green) !important;
+}
+
+.text-earth {
+  color: var(--earth-brown) !important;
+}
+
+.bg-organic {
+  background-color: var(--organic-green) !important;
+}
+
+.bg-earth-beige {
+  background-color: var(--earth-beige) !important;
+}
+
+.bg-warm-white {
+  background-color: var(--warm-white) !important;
+}
+
+.shadow-organic {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.rounded-organic {
+  border-radius: var(--radius-lg) !important;
+}

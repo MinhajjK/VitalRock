@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { listBrands } from "../../actions/brandActions";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 
-const BrandListScreen = ({ history }) => {
+const BrandListScreen = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const brandList = useSelector((state) => state.brandList);
@@ -19,9 +21,9 @@ const BrandListScreen = ({ history }) => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listBrands());
     } else {
-      history.push("/login");
+      navigate("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, navigate, userInfo]);
 
   return (
     <>

@@ -1,42 +1,45 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useHistory, useLocation } from 'react-router-dom'
-import { Form, Button, Row, Col } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import Message from '../../components/Message'
-import Loader from '../../components/Loader'
-import FormContainer from '../../components/FormContainer'
-import { login } from '../../actions/userActions'
+import { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { login } from "../../actions/userActions";
+import FormContainer from "../../components/FormContainer";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
 
 const AdminLoginScreen = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [twoFactorToken, setTwoFactorToken] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [twoFactorToken, setTwoFactorToken] = useState("");
 
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const location = useLocation()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
 
-  const redirect = location.search ? location.search.split('=')[1] : '/admin/dashboard'
+  const redirect = location.search
+    ? location.search.split("=")[1]
+    : "/admin/dashboard";
 
   useEffect(() => {
     if (userInfo) {
-      const isAdmin = userInfo.isAdmin || (userInfo.role && userInfo.role.level <= 2)
+      const isAdmin =
+        userInfo.isAdmin || (userInfo.role && userInfo.role.level <= 2);
       if (isAdmin) {
-        history.push(redirect)
+        navigate(redirect);
       } else {
-        history.push('/')
+        navigate("/");
       }
     }
-  }, [history, userInfo, redirect])
+  }, [navigate, userInfo, redirect]);
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // TODO: Update login action to support admin login endpoint
-    dispatch(login(email, password))
-  }
+    dispatch(login(email, password));
+  };
 
   return (
     <FormContainer>
@@ -75,7 +78,7 @@ const AdminLoginScreen = () => {
         </Col>
       </Row>
     </FormContainer>
-  )
-}
+  );
+};
 
-export default AdminLoginScreen
+export default AdminLoginScreen;

@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Badge, Card, Col, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { listOrders } from "../actions/orderActions";
 import { listProducts } from "../actions/productActions";
 import { listUsers } from "../actions/userActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
-const AdminDashboardScreen = ({ history }) => {
+const AdminDashboardScreen = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -29,9 +31,9 @@ const AdminDashboardScreen = ({ history }) => {
       dispatch(listOrders());
       dispatch(listUsers());
     } else {
-      history.push("/login");
+      navigate("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, navigate, userInfo]);
 
   // Calculate statistics
   const totalProducts = products?.length || 0;
