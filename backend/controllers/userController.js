@@ -11,13 +11,20 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email })
 
   if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
-    })
+      const userWithRole = await User.findById(user._id)
+        .select('-password')
+        .populate('role', 'name slug level')
+        .populate('permissions', 'name slug')
+
+      res.json({
+        _id: userWithRole._id,
+        name: userWithRole.name,
+        email: userWithRole.email,
+        isAdmin: userWithRole.isAdmin,
+        role: userWithRole.role,
+        permissions: userWithRole.permissions,
+        token: generateToken(userWithRole._id),
+      })
   } else {
     res.status(401)
     throw new Error('Invalid email or password')
@@ -37,19 +44,31 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('User already exists')
   }
 
+  // Get Customer role
+  const Role = (await import('../models/roleModel.js')).default
+  const customerRole = await Role.findOne({ slug: 'customer' })
+
   const user = await User.create({
     name,
     email,
     password,
+    role: customerRole ? customerRole._id : null,
   })
 
   if (user) {
+    const userWithRole = await User.findById(user._id)
+      .select('-password')
+      .populate('role', 'name slug level')
+      .populate('permissions', 'name slug')
+
     res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
+      _id: userWithRole._id,
+      name: userWithRole.name,
+      email: userWithRole.email,
+      isAdmin: userWithRole.isAdmin,
+      role: userWithRole.role,
+      permissions: userWithRole.permissions,
+      token: generateToken(userWithRole._id),
     })
   } else {
     res.status(400)

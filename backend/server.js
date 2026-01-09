@@ -13,6 +13,13 @@ import uploadRoutes from './routes/uploadRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
 import brandRoutes from './routes/brandRoutes.js'
 import certificationRoutes from './routes/certificationRoutes.js'
+import adminAuthRoutes from './routes/admin/adminAuthRoutes.js'
+import adminRoleRoutes from './routes/admin/adminRoleRoutes.js'
+import adminStoreRoutes from './routes/admin/adminStoreRoutes.js'
+import adminProductRoutes from './routes/admin/adminProductRoutes.js'
+import adminInventoryRoutes from './routes/admin/adminInventoryRoutes.js'
+import adminOrderRoutes from './routes/admin/adminOrderRoutes.js'
+import adminUserRoutes from './routes/admin/adminUserRoutes.js'
 
 dotenv.config()
 
@@ -33,6 +40,13 @@ app.use('/api/upload', uploadRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/brands', brandRoutes)
 app.use('/api/certifications', certificationRoutes)
+app.use('/api/admin/auth', adminAuthRoutes)
+app.use('/api/admin/roles', adminRoleRoutes)
+app.use('/api/admin/store', adminStoreRoutes)
+app.use('/api/admin/products', adminProductRoutes)
+app.use('/api/admin/inventory', adminInventoryRoutes)
+app.use('/api/admin/orders', adminOrderRoutes)
+app.use('/api/admin/users', adminUserRoutes)
 
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)

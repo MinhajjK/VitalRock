@@ -43,6 +43,15 @@ import {
   orderListMyReducer,
   orderListReducer,
 } from './reducers/orderReducers'
+import {
+  adminAuthReducer,
+  adminRoleListReducer,
+  adminRoleDetailsReducer,
+  adminRoleCreateReducer,
+  adminRoleUpdateReducer,
+  adminRoleDeleteReducer,
+  adminPermissionListReducer,
+} from './reducers/adminReducers'
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -75,6 +84,13 @@ const reducer = combineReducers({
   orderDeliver: orderDeliverReducer,
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
+  adminAuth: adminAuthReducer,
+  adminRoleList: adminRoleListReducer,
+  adminRoleDetails: adminRoleDetailsReducer,
+  adminRoleCreate: adminRoleCreateReducer,
+  adminRoleUpdate: adminRoleUpdateReducer,
+  adminRoleDelete: adminRoleDeleteReducer,
+  adminPermissionList: adminPermissionListReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
